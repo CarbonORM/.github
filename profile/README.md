@@ -32,12 +32,12 @@ Queries can be locked using [MySQL InnoDB ^8](https://dev.mysql.com/doc/refman/8
 
 As C6-enabled SQL queries are just objects and arrays, queries can be stored and abstracted in variables or constants and modified without string manipulation. Hooray! Middleware languages have varying syntax for representing these datatypes. To view language-specific examples for middleware queries, please check out your respective middleware repository:
 
-[All Organization Repositories](https://github.com/orgs/CarbonORM/repositories)
-[CarbonPHP](https://github.com/CarbonORM/CarbonPHP)
-[CarbonNode](https://github.com/CarbonORM/CarbonNode)
-[CarbonReact](https://github.com/CarbonORM/CarbonReact)
-[CarbonJava](https://github.com/CarbonORM/CarbonJava)
-[CarbonPython](https://github.com/CarbonORM/CarbonPython)
+- [All Organization Repositories](https://github.com/orgs/CarbonORM/repositories)
+- [CarbonPHP](https://github.com/CarbonORM/CarbonPHP)
+- [CarbonNode](https://github.com/CarbonORM/CarbonNode)
+- [CarbonReact](https://github.com/CarbonORM/CarbonReact)
+- [CarbonJava](https://github.com/CarbonORM/CarbonJava)
+- [CarbonPython](https://github.com/CarbonORM/CarbonPython)
 
 We will use the standard frontend JavaScript (TypeScript) syntax for our examples below. GET requests are JSON based and serialized into query parameters using `qs`.
 
