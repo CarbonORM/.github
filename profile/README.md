@@ -28,9 +28,27 @@ It's possible to process complex Transactional code, kill a request based on the
 
 Queries can be locked using [MySQL InnoDB ^8](https://dev.mysql.com/doc/refman/8.0/en/innodb-locking-reads.html) `FOR UPDATE` and `FOR SHARE,` which we can be used by adding `self::LOCK => self::FOR_UPDATE,` and `self::LOCK => self::FOR_SHARE` to the query body.
 
-## Frontend to Backend JSON Syntax
+## Frontend -> Backend JSON Syntax
 
-As C6-enabled SQL queries are just objects and arrays, queries can be stored and abstracted in variables or constants and modified without string manipulation. Hooray! Middleware languages have varying syntax for representing these datatypes. To view language-specific examples for middleware queries, please check out the CarbonORM/Carbon<Middleware> repository, where <Middleware> is your language. We will use the standard frontend JavaScript (TypeScript) syntax for our examples here:
+As C6-enabled SQL queries are just objects and arrays, queries can be stored and abstracted in variables or constants and modified without string manipulation. Hooray! Middleware languages have varying syntax for representing these datatypes. To view language-specific examples for middleware queries, please check out your respective middleware repository:
+
+[All Organization Repositories](https://github.com/orgs/CarbonORM/repositories)
+[CarbonPHP](https://github.com/CarbonORM/CarbonPHP)
+[CarbonNode](https://github.com/CarbonORM/CarbonNode)
+[CarbonReact](https://github.com/CarbonORM/CarbonReact)
+[CarbonJava](https://github.com/CarbonORM/CarbonJava)
+[CarbonPython](https://github.com/CarbonORM/CarbonPython)
+
+We will use the standard frontend JavaScript (TypeScript) syntax for our examples below. GET requests are JSON based and serialized into query parameters using `qs`.
+
+```Qs.stringify(params, {arrayFormat: 'indices', indices: true, skipNulls: false, strictNullHandling: true})```
+
+QS is a dependency of CarbonNode and thereby CarbonReact.
+
+```
+"@types/qs": "^6.9.8",
+"qs": "^6.11.1",
+```
 
 ### GET (SELECT) 
 #### SIMPLE
