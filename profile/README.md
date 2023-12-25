@@ -11,7 +11,7 @@ The CarbonORMs are sometimes called C6 since Carbon is the sixth element in the 
 
 ## Removing the risk of SQL injection entirely with [prepared statements](https://owasp.org/www-community/attacks/SQL_Injection)
 
-Most languages support prepared statements, but the boilerplate code becomes repetitive in large projects. C6 is a response to the recognition that the likelihood of a mistake will skyrocket when developers must do mind-numbingly mundane repetitions. We eliminate the need for repetition by looping through these data structures and validating against our auto-generated code data definitions.
+Most languages support prepared statements, but the boilerplate code becomes repetitive in large projects. We eliminate the need for repetition by looping through these data structures and validating against our auto-generated code data definitions.
 
 ### How do we stop arbitrary SQL execution? (frontend testing is now necessary)
 
