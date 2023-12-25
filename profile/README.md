@@ -41,11 +41,13 @@ As C6-enabled SQL queries are just objects and arrays, queries can be stored and
 
 We will use the standard frontend JavaScript (TypeScript) syntax for our examples below. GET requests are JSON based and serialized into query parameters using `qs`.
 
-```Qs.stringify(params, {arrayFormat: 'indices', indices: true, skipNulls: false, strictNullHandling: true})```
+```TypeScript
+Qs.stringify(params, {arrayFormat: 'indices', indices: true, skipNulls: false, strictNullHandling: true})
+```
 
 QS is a dependency of CarbonNode and thereby CarbonReact.
 
-```
+```JSON
 "@types/qs": "^6.9.8",
 "qs": "^6.11.1",
 ```
