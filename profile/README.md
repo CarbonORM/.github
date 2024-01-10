@@ -1,4 +1,5 @@
 # Welcome to [CarbonORM](https://carbonorm.dev/) 👋
+View all our documentation at [www.CarbonORM.dev](https://carbonorm.dev/)!
 
 The CarbonORMs are sometimes called C6 since Carbon is the sixth element in the [periodic table of the elements](https://en.wikipedia.org/wiki/Periodic_table). We aim to enable developers to query SQL in their middleware and frontend in a safe, constant, and syntactically pleasing way. Our Rest-based ORM auto-generates 1-1 type references to your tables and columns in JavaScript, TypeScript, and your middleware language (PHP, JAVA, PYTHON, C#, ...). We are still working to support all major languages, and help is very much welcome! Payloads between the frontend and middleware are JSON based, and working with SQL in your middleware will use objects and array language-specific datatypes. Our generated C6 typings ensure a few things:
 
@@ -46,12 +47,47 @@ We will use the standard frontend JavaScript (TypeScript) syntax for our example
 Qs.stringify(params, {arrayFormat: 'indices', indices: true, skipNulls: false, strictNullHandling: true})
 ```
 
-QS is a dependency of CarbonNode and thereby CarbonReact.
+QS is a dependency of CarbonNode and thereby CarbonReact. It will automatically be added to your package when you install either.
 
 ```JSON
 "@types/qs": "^6.9.8",
 "qs": "^6.11.1",
 ```
+
+#### APACHE Setup
+
+`httpd` and `apache2` are the same application - just that some Linux distributions refer to it differently within package managers and config files. RedHat-based distros (CentOS, Fedora) refer to it as httpd while Debian-based distros (Ubuntu) refer to it as apache. The commands below use `httpd`, but if that fails you should try replacing it with `apache2`
+
+1) Open Apache configuration file. ex `/usr/local/etc/httpd/httpd.conf`
+    - If you do not know where it is you can run `httpd -t -D DUMP_INCLUDES` to output the locations. In rare cases, if multiple versions or instances of apache exist on the machine the httpd executable may not output the correct information. Using `where httpd` can potentially show multiple executables you may explicitly try `/usr/local/bin/httpd -t -D DUMP_INCLUDES`
+2) Edit or add the file to include `LimitRequestLine 40000` and `LimitRequestFieldSize 40000`
+3) Restart apache `httpd restart` or `apache2 restart`
+
+The limit of **40,000** is arbitrary and can be adjusted. We recommend you use a this value or even **20,000** to help catch progromatic error you may cause. A common issues occurs when using [MySQL IN Clause](https://dev.mysql.com/doc/refman/8.0/en/any-in-some-subqueries.html), which can have its own [limits](https://stackoverflow.com/questions/12666502/mysql-in-clause-max-number-of-arguments), to filter out data already slected and cached in the ui/frontend. As example, passing ten thousand ID's is not a good solution and we might want that to actually fail so we can write a better MySQL join and paginate properly. The C6 Frontend bindings have built in pagination support. Checkout all our documentation out at [CarbonORM.dev](https://carbonorm.dev/).
+
+##### Browser Support 
+
+Our middleware ORM's do not require a browser. The CarbonReact and Javascript bindings send full JSON SQL with does require large request URI's. This is typically not an issue for most applications, but may require a few custom configurations to your CDN and Apache/Nginx/etc server. This also means, for now, we **genearlly do not support Microsoft Edge browser**. Requests other than GET will work for all browers. Many small requests, or simple select statments, will also work. When a Select gets complex with joins you generally will see anywhere from 2,000 - 12,000 characters being sent to the backend system. Queries may be even longer and C6 defines no limit on its own.
+
+| Browser |	Max URL Length | Notes |
+| ------- | --------------:| ---- |
+| Microsoft IE	| 2,048 | The Internet Explorer 11 desktop application went out of support for certain operating systems starting June 15, 2022 |
+| Microsoft Edge |	4,741 | "... Jerry Han's answer was of 4035 consistent with my observations in June, 2020. However, I've observed that the correct answer depends on the version of Edge. As of today, however, I'm seeing a 4741 character test link (which failed last summer), work just fine in the latest version (89.0.744.63) of Edge.](https://stackoverflow.com/a/66824546/5033601) |
+| Firefox |	65,536 | As of June 2022, Firefox allows URLs to be unlimited in length, but the location bar will not display URLs after 65,536 characters. |
+| Chrome | 2,097,152 | |
+| Safari | 80,000 | | 
+| Opera	| unlimited | |
+
+
+CDNs also impose limits on URI length, and will return a 414 Too long request when these limits are reached. Generally, C6 Rest based requests will/should not be cached on a CDN level and should provide no indexing to search engines. This is a general precident for all web based API's. Your applications rest endpoint defaults to `/rest/` but may be customized with a prefix. This endpoint should be blocked from caching. 
+
+| CDN | Limit |
+| --- | -----:|
+| [Fastly](https://docs.fastly.com/en/guides/controlling-caching#:~:text=From%20the%20Action%20menu%2C%20select,%2C%20in%20seconds%2C%20to%20zero.) | 8,096 |
+| [CloudFront](https://repost.aws/knowledge-center/prevent-cloudfront-from-caching-files) | 8,096 |
+| [CloudFlare](https://community.cloudflare.com/t/exclude-urls-from-caching/100681) | 32,384 |
+
+
 
 ### GET (SELECT) 
 #### SIMPLE
