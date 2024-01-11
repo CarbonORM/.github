@@ -103,7 +103,7 @@ You can refer to [this StackOverflow post](https://stackoverflow.com/questions/1
 
 ##### Browser Support 
 
-Our middleware ORM's do not require a browser. The CarbonReact and Javascript bindings send full JSON SQL with does require large request URI's. This is typically not an issue for most applications, but may require a few custom configurations to your CDN and Apache/Nginx/etc server. This also means, for now, we **genearlly do not support Microsoft Edge browser**. Requests other than GET will work for all browers. Many small requests, or simple select statments, will also work. When a Select gets complex with joins you generally will see anywhere from 2,000 - 12,000 characters being sent to the backend system. Queries may be even longer and C6 defines no limit on its own.
+Our middleware ORM's do not require a browser. The CarbonReact and Javascript bindings send full JSON SQL with does require large request URI's. This is typically not an issue for most applications, but may require a few custom configurations to your CDN and Apache/Nginx/etc server. This also means, for now, we **genearlly do not support Microsoft Edge browser**. A plan to use WebSockets to optionally facillitate requests would allow Edge support, but no timeline has been set. Many small simple select statments will work. When a Select gets complex with joins you generally will see anywhere from 2,000 - 12,000 characters being sent to the backend system. Queries may be even longer and C6 defines no limit on its own.
 
 | Browser |	Max URL Length | Notes |
 | ------- | --------------:| ---- |
