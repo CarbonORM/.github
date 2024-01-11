@@ -59,7 +59,7 @@ QS is a dependency of CarbonNode and thereby CarbonReact. It will automatically 
 `httpd` and `apache2` are the same application - just that some Linux distributions refer to it differently within package managers and config files. RedHat-based distros (CentOS, Fedora) refer to it as httpd while Debian-based distros (Ubuntu) refer to it as apache. The commands below use `httpd`, but if that fails you should try replacing it with `apache2`
 
 1) Open Apache configuration file. ex `/usr/local/etc/httpd/httpd.conf`
-    - If you do not know where it is you can run `httpd -t -D DUMP_INCLUDES` to output the locations. In rare cases, if multiple versions or instances of apache exist on the machine the httpd executable may not output the correct information. Using `where httpd` can potentially show multiple executables you may explicitly try `/usr/local/bin/httpd -t -D DUMP_INCLUDES`
+    - If you do not know where it is you can run `httpd -t -D DUMP_INCLUDES` to output the locations. In rare cases, if multiple versions or instances of apache exist on the machine the httpd executable may not output the correct information. Using `where httpd` can potentially show multiple executables you may explicitly try `/usr/local/bin/httpd -t -D DUMP_INCLUDES` 
 2) Edit or add the file to include `LimitRequestLine 40000` and `LimitRequestFieldSize 40000`
 3) Restart apache `httpd restart` or `apache2 restart`
 
@@ -83,12 +83,11 @@ Find the http block in the configuration file. Inside this block, add or modify 
 ```nginx
 http {
     ...
-    large_client_header_buffers 4 32k;
+    large_client_header_buffers 4 24k;
     ...
 }
 ```
-Here, 4 is the number of buffers, and 32k is the size of each buffer. Adjust the size as needed to accommodate your URL length requirement.
-Test the Configuration: After editing, it's important to test the configuration for syntax errors:
+Here, 4 is the number of buffers, and 24k is the size of each buffer. This will roughly equal **20,000** character limit. To move to **80,000** change the directive to `large_client_header_buffers 4 100k;`. Adjust the size as needed to accommodate your URL length requirement. Test the Configuration: After editing, it's important to test the configuration for syntax errors:
 
 ```bash
 sudo nginx -t
