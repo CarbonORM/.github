@@ -54,7 +54,7 @@ QS is a dependency of CarbonNode and thereby CarbonReact. It will automatically 
 "qs": "^6.11.1",
 ```
 
-#### APACHE Setup
+#### Apache Setup
 
 `httpd` and `apache2` are the same application - just that some Linux distributions refer to it differently within package managers and config files. RedHat-based distros (CentOS, Fedora) refer to it as httpd while Debian-based distros (Ubuntu) refer to it as apache. The commands below use `httpd`, but if that fails you should try replacing it with `apache2`
 
@@ -64,6 +64,43 @@ QS is a dependency of CarbonNode and thereby CarbonReact. It will automatically 
 3) Restart apache `httpd restart` or `apache2 restart`
 
 The limit of **40,000** is arbitrary and can be adjusted. We recommend you use a this value or even **20,000** to help catch progromatic error you may cause. A common issues occurs when using [MySQL IN Clause](https://dev.mysql.com/doc/refman/8.0/en/any-in-some-subqueries.html), which can have its own [limits](https://stackoverflow.com/questions/12666502/mysql-in-clause-max-number-of-arguments), to filter out data already slected and cached in the ui/frontend. As example, passing ten thousand ID's is not a good solution and we might want that to actually fail so we can write a better MySQL join and paginate properly. The C6 Frontend bindings have built in pagination support. Checkout all our documentation out at [CarbonORM.dev](https://carbonorm.dev/).
+
+
+#### Nginx Setup
+
+Locate NGINX Configuration File: The main NGINX configuration file is typically located at `/etc/nginx/nginx.conf`. However, the specific file to edit can vary depending on your server setup. It might be in a site-specific configuration file in the `/etc/nginx/sites-available/` directory.
+
+Edit the Configuration File:
+
+Open the configuration file in a text editor. For example, using nano:
+
+```bash
+sudo nano /etc/nginx/nginx.conf
+```
+
+Find the http block in the configuration file. Inside this block, add or modify the large_client_header_buffers directive. For a 20,000 character URL limit, you need to set the buffer size larger than 20,000. The directive takes two parameters: the number of buffers and the size of each buffer. For example:
+
+```nginx
+http {
+    ...
+    large_client_header_buffers 4 32k;
+    ...
+}
+```
+Here, 4 is the number of buffers, and 32k is the size of each buffer. Adjust the size as needed to accommodate your URL length requirement.
+Test the Configuration: After editing, it's important to test the configuration for syntax errors:
+
+```bash
+sudo nginx -t
+```
+Reload NGINX: If the configuration test is successful, reload NGINX to apply the changes:
+
+```bash
+sudo systemctl reload nginx
+```
+Verify Changes: Test with a long URL to ensure the new configuration is working as expected.
+
+You can refer to [this StackOverflow post](https://stackoverflow.com/questions/1067334/how-to-set-the-allowed-url-length-for-a-nginx-request-error-code-414-uri-too).
 
 ##### Browser Support 
 
@@ -141,7 +178,7 @@ export default restApi<{}, iDig_Chat_Global_Messages, {}, iGetC6RestResponse<iDi
     },
     responseCallback: response => {
 
-        const restData = response?.data?.rest || [];
+        const restData = response?.data?.rest A|| [];
 
         DigApi.digApi.setState((previousState) => ({
             globalMessages: [...previousState.globalMessages || [], ...restData],
