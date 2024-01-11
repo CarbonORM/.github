@@ -108,7 +108,7 @@ Our middleware ORM's do not require a browser. The CarbonReact and Javascript bi
 | Browser |	Max URL Length | Notes |
 | ------- | --------------:| ---- |
 | Microsoft IE	| 2,048 | The Internet Explorer 11 desktop application went out of support for certain operating systems starting June 15, 2022 |
-| Microsoft Edge |	4,741 | "... Jerry Han's answer was of 4035 consistent with my observations in June, 2020. However, I've observed that the correct answer depends on the version of Edge. As of today, however, I'm seeing a 4741 character test link (which failed last summer), work just fine in the latest version (89.0.744.63) of Edge.](https://stackoverflow.com/a/66824546/5033601) |
+| Microsoft Edge |	4,741 | ["... Jerry Han's answer was of 4035 consistent with my observations in June, 2020. However, I've observed that the correct answer depends on the version of Edge. As of today, however, I'm seeing a 4741 character test link (which failed last summer), work just fine in the latest version (89.0.744.63) of Edge."](https://stackoverflow.com/a/66824546/5033601) |
 | Firefox |	65,536 | As of June 2022, Firefox allows URLs to be unlimited in length, but the location bar will not display URLs after 65,536 characters. |
 | Chrome | 2,097,152 | |
 | Safari | 80,000 | | 
