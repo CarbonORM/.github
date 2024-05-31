@@ -10,6 +10,12 @@ The CarbonORMs are sometimes called C6 since Carbon is the sixth element in the 
 5. Teams of developers can ensure that the SQL data schema stays up-to-date with each other. We have identified general change rules that allow CarbonORM to update projects on different servers or databases automagically. Some examples include auto-creating columns, primary and foreign key references, and changing column types. CarbonORM has also standardized where making advanced table updates should be placed. When changes exist that cannot be deterministically automated by us, an error will be thrown!
 
 
+## Language Support
+
+This concept began as a simple PHP project and have slowly found itseld integrating with NodeJs and the React Frontend runtime. Other language repositories are in progress but no other are ready to be use in a production setting. Focus for future development has been restricted to minor and patch releases in CarbonPHP. CarbonNode will gain many of the feature CarbonPHP already offer. Development in CarbonC will begin and take precidence to help introduce module support for many laguages with one package. For example Ruby, Python, Node, and PHP are all written in C so writing CarbonORM in C is an enevitabillity that will increase preformance for all of these higher level languages
+
+
+
 ## Removing the risk of SQL injection entirely with [prepared statements](https://owasp.org/www-community/attacks/SQL_Injection)
 
 Most languages support prepared statements, but the boilerplate code becomes repetitive in large projects. We eliminate the need for repetition by looping through these data structures and validating against our auto-generated code data definitions.
