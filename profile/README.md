@@ -12,7 +12,7 @@ The CarbonORMs are sometimes called C6 since Carbon is the sixth element in the 
 
 ## Language Support
 
-This concept began as a simple PHP project and have slowly found itseld integrating with NodeJs and the React Frontend runtime. Other language repositories are in progress but no other are ready to be use in a production setting. Focus for future development has been restricted to minor and patch releases in CarbonPHP. CarbonNode will gain many of the feature CarbonPHP already offer. Development in CarbonC will begin and take precidence to help introduce module support for many laguages with one package. For example Ruby, Python, Node, and PHP are all written in C so writing CarbonORM in C is an enevitabillity that will increase preformance for all of these higher level languages
+This concept began as a simple PHP project and have slowly began integrating with NodeJs and the React Frontend runtime. Other language repositories are in progress but no other are ready to be use in a production setting. Focus for future development has been restricted to minor and patch releases in CarbonPHP. CarbonNode will gain many of the feature CarbonPHP already offer. Development in CarbonC will begin and take precidence to help introduce module support for many laguages with one package. For example Ruby, Python, Node, and PHP are all written in C so writing CarbonORM in C is an enevitabillity that will increase preformance for all of these higher level languages
 
 
 
